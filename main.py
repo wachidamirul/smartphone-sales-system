@@ -1,3 +1,7 @@
+from utils.message import message
+from utils.clear import clear
+
+
 def main():
     while True:
         print("\n====== Menu ======")
@@ -7,14 +11,18 @@ def main():
         choice = input("Enter your choice: ")
 
         if choice == "1":
-            print("\nAdd Smartphone")
+            clear()
+            message("Add Store")
         elif choice == "2":
-            print("\nDisplay Smartphone")
+            clear()
+            message("Display Stores")
         elif choice == "99":
-            print("Exiting System, Goodbye!")
+            clear()
+            message("Exiting System, Goodbye!")
             break
         else:
-            print("Invalid choice, please try again.", True)
+            clear()
+            message("Invalid choice, please try again.", True)
 
 
 if __name__ == "__main__":
