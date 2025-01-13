@@ -8,9 +8,6 @@ class Store:
     def __init__(self):
         self.smartphones = []
 
-    def get_smartphones(self):
-        return self.smartphones
-
     def add_smartphone(self):
         header_menu("Add Smartphone")
         # Get smartphone details
@@ -19,13 +16,13 @@ class Store:
         stock = input_int("Enter smartphone stock: ", 0)
 
         # Check if smartphone already exists
-        for smartphone in self.get_smartphones():
+        for smartphone in self.smartphones:
             if smartphone.name.lower() == name.lower():
                 message(f"{name} already exists. Please try again.", True)
                 return
 
         # Get the next id
-        id = len(self.get_smartphones()) + 1
+        id = len(self.smartphones) + 1
 
         # Create Smartphone object
         smartphone = Smartphone(id, name, price, stock)
@@ -37,10 +34,10 @@ class Store:
         header_product()
 
         # Check if smartphone list is empty
-        if not self.get_smartphones():
+        if not self.smartphones:
             message("Smartphone list is empty", True)
             return
 
         # Display smartphone list
-        for smartphone in self.get_smartphones():
+        for smartphone in self.smartphones:
             print(smartphone)
