@@ -1,5 +1,6 @@
+from model.customer import Customer
 from model.smartphone import Smartphone
-from utils.header import header_menu, header_product
+from utils.header import header_customer, header_product, header_menu
 from utils.input_utils import input_float, input_int, input_string
 from utils.message import message
 
@@ -7,6 +8,7 @@ from utils.message import message
 class Store:
     def __init__(self):
         self.smartphones = []
+        self.customers = []
 
     def add_smartphone(self):
         header_menu("Add Smartphone")
@@ -41,3 +43,35 @@ class Store:
         # Display smartphone list
         for smartphone in self.smartphones:
             print(smartphone)
+
+    def add_customer(self):
+        header_menu("Add Customer")
+        # Get customer details
+        name = input_string("Enter customer name: ")
+        email = input_string("Enter customer email: ")
+
+        # Check if customer already exists
+        for customer in self.customers:
+            if customer.email.lower() == email.lower():
+                message(f"{email} already exists. Please try again.", True)
+                return
+
+        # Get the next id
+        id = len(self.customers) + 1
+
+        # Create Customer object
+        customer = Customer(id, name, email)
+        self.customers.append(customer)
+        message(f"{name} has been added successfully.")
+
+    def display_customers(self):
+        header_menu("List of Customers")
+        header_customer()
+        # Check if customer list is empty
+        if not self.customers:
+            message("Customer list is empty", True)
+            return
+
+        # Display customer list
+        for customer in self.customers:
+            print(customer)
