@@ -1,21 +1,24 @@
+from model.store import Store
 from utils.message import message
 from utils.clear import clear
 
 
 def main():
+    store = Store()
+
     while True:
         print("\n====== Menu ======")
-        print("1. Add Store")
-        print("2. Display Stores")
+        print("1. Add Smartphone")
+        print("2. Display Smartphones")
         print("99. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
             clear()
-            message("Add Store")
+            store.add_smartphone()
         elif choice == "2":
             clear()
-            message("Display Stores")
+            store.display_smartphones()
         elif choice == "99":
             clear()
             message("Exiting System, Goodbye!")
