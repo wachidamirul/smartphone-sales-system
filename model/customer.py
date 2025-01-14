@@ -1,5 +1,5 @@
 from utils.colors import *
-from utils.header import header_customer, header_menu
+from utils.header import header_customer
 from utils.input_utils import input_string
 from utils.message import message
 
@@ -15,7 +15,6 @@ class Customer:
 
     @classmethod
     def create(cls, customers):
-        header_menu("Add Customer")
         # Get customer details
         name = input_string("Enter customer name: ")
         email = input_string("Enter customer email: ")
@@ -36,7 +35,6 @@ class Customer:
 
     @classmethod
     def view(cls, customers):
-        header_menu("List of Customers")
         header_customer()
         # Check if customer list is empty
         if not customers:

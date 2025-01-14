@@ -1,5 +1,5 @@
 from utils.colors import *
-from utils.header import header_menu, header_product
+from utils.header import header_product
 from utils.input_utils import input_float, input_int, input_string
 from utils.message import message
 
@@ -22,7 +22,6 @@ class Smartphone:
 
     @classmethod
     def create(cls, smartphones):
-        header_menu("Add Smartphone")
         # Get smartphone details
         name = input_string("Enter smartphone name: ")
         price = input_float("Enter smartphone price: ", 0.01)
@@ -44,7 +43,6 @@ class Smartphone:
 
     @classmethod
     def view(cls, smartphones):
-        header_menu("List of Smartphones")
         header_product()
 
         # Check if smartphone list is empty

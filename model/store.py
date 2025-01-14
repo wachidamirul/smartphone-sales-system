@@ -1,6 +1,8 @@
 from model.customer import Customer
 from model.smartphone import Smartphone
+from model.transaction import Transaction
 from utils.clear import clear
+from utils.header import header_menu
 from utils.message import message
 from utils.colors import *
 
@@ -33,22 +35,28 @@ class Store:
 
                 if choice == 1:
                     clear()
-                    Smartphone.create(Store.smartphones)
+                    header_menu("Add Smartphone")
+                    Smartphone.create(cls.smartphones)
                 elif choice == 2:
                     clear()
-                    Smartphone.view(Store.smartphones)
+                    header_menu("List of Smartphones")
+                    Smartphone.view(cls.smartphones)
                 elif choice == 3:
                     clear()
-                    Customer.create(Store.customers)
+                    header_menu("Add Customer")
+                    Customer.create(cls.customers)
                 elif choice == 4:
                     clear()
-                    Customer.view(Store.customers)
+                    header_menu("List of Customers")
+                    Customer.view(cls.customers)
                 elif choice == 5:
                     clear()
-                    message("Under construction", True)
+                    header_menu("Add Transaction")
+                    Transaction.create(cls.customers, cls.smartphones, cls.transactions)
                 elif choice == 6:
                     clear()
-                    message("Under construction", True)
+                    header_menu("List of Transactions")
+                    Transaction.view(cls.transactions)
                 elif choice == 99:
                     clear()
                     message("Exiting System, Goodbye!")
@@ -58,3 +66,6 @@ class Store:
                     message("Invalid choice, please try again.", True)
         except ValueError:
             message("Invalid input, please enter a number.", True)
+        except KeyboardInterrupt:
+            clear()
+            message("Exiting System, Goodbye!")

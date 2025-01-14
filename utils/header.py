@@ -9,3 +9,9 @@ def header_product():
 
 def header_customer():
     print(f"{'ID':<5} {'Name':<20} {'Email':<20}")
+
+
+def header_transaction():
+    print(
+        f"{'ID':<5} {'Customer':<10} {'Smartphone':<15} {'Quantity':<10} {'Total':<15}"
+    )
