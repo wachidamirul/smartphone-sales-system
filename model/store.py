@@ -2,6 +2,7 @@ from model.customer import Customer
 from model.smartphone import Smartphone
 from utils.clear import clear
 from utils.message import message
+from utils.colors import *
 
 
 class Store:
@@ -24,7 +25,11 @@ class Store:
                 print("5. Add Transaction")
                 print("6. Display Transactions")
                 print("99. Exit")
-                choice = int(input("Enter your choice: "))
+                choice = int(
+                    input(
+                        f"Enter your choice {BRIGHT_YELLOW}(1-6 or 99 to exit){RESET}: "
+                    )
+                )
 
                 if choice == 1:
                     clear()
@@ -52,4 +57,4 @@ class Store:
                     clear()
                     message("Invalid choice, please try again.", True)
         except ValueError:
-            message("Invalid choice, please try again.", True)
+            message("Invalid input, please enter a number.", True)
