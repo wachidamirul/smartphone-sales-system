@@ -9,14 +9,9 @@ class Customer:
         self.id = id
         self.name = name
         self.email = email
-        self.transactions = []
 
     def __str__(self):
         return f"{BRIGHT_BLUE}{self.id:<5} {self.name:<20} {self.email:<20}{RESET}"
-
-    def add_transaction(self, transaction):
-        self.transactions.append(transaction)
-        return f"Transaction ID: {transaction.id} has been added to {self.name}"
 
     @classmethod
     def create(cls, customers):
