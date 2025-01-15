@@ -24,13 +24,11 @@ class Transaction:
 
     @classmethod
     def create(cls, customers, smartphones, transactions):
-        # Show list of customers
         header_customer()
         for customer in customers:
             print(customer)
         customer_id = get_valid_id("Enter customer ID: ", customers, "Customer")
 
-        # Show list of smartphones
         clear()
         header_menu("Add Transaction")
         header_product()
@@ -39,9 +37,8 @@ class Transaction:
         print(f"Enter customer ID: {customer_id}")
 
         smartphone_id = get_valid_id("Enter smartphone ID: ", smartphones, "Smartphone")
-
-        # Check if smartphone is available
         smartphone = smartphones[smartphone_id - 1]
+
         while not smartphone.is_available(smartphone.stock):
             message(
                 f"Stock for {smartphone.name} is not available. Please select another smartphone.",
@@ -52,19 +49,13 @@ class Transaction:
             )
             smartphone = smartphones[smartphone_id - 1]
 
-        # Get valid quantity
         quantity = get_valid_quantity("Enter quantity: ", smartphone.stock)
-
-        # Get the next transaction ID
         transaction_id = len(transactions) + 1
 
-        # Create Transaction object
         transaction = Transaction(
             transaction_id, customers[customer_id - 1], smartphone, quantity
         )
         transactions.append(transaction)
-
-        # Update stock
         smartphone.update_stock(quantity)
 
         message(

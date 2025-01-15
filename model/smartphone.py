@@ -21,9 +21,6 @@ class Smartphone:
     def update_stock(self, quantity: int):
         self.stock -= quantity
 
-    def restock(self, quantity: int):
-        self.stock += quantity
-
     def is_available(self, stock: int) -> bool:
         return self.stock >= stock and stock > 0
 

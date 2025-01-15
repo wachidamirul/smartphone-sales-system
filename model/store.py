@@ -17,8 +17,8 @@ class Store:
 
     @classmethod
     def menu(cls):
-        try:
-            while True:
+        while True:
+            try:
                 print("\n====== Menu ======")
                 print("1. Add Smartphone")
                 print("2. Display Smartphones")
@@ -27,11 +27,15 @@ class Store:
                 print("5. Add Transaction")
                 print("6. Display Transactions")
                 print("99. Exit")
-                choice = int(
-                    input(
-                        f"Enter your choice {BRIGHT_YELLOW}(1-6 or 99 to exit){RESET}: "
-                    )
+
+                choice = input(
+                    f"Enter your choice {BRIGHT_YELLOW}(1-6 or 99 to exit){RESET}: "
                 )
+
+                if not choice.isdigit():
+                    raise ValueError("Choice must be a number.")
+
+                choice = int(choice)
 
                 if choice == 1:
                     clear()
@@ -63,11 +67,12 @@ class Store:
                     break
                 else:
                     clear()
-                    message("Invalid choice, please try again.", True)
-        except ValueError:
-            clear()
-            message("Invalid choice, please try again.", True)
-            cls.menu()
-        except KeyboardInterrupt:
-            clear()
-            message("Exiting System, Goodbye!")
+                    message("Invalid choice. Please try again.", True)
+
+            except ValueError as e:
+                clear()
+                message(f"Error: {e}. Please try again.", True)
+            except KeyboardInterrupt:
+                clear()
+                message("Exiting System, Goodbye!")
+                break

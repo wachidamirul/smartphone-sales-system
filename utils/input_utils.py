@@ -22,7 +22,7 @@ def _input_value(prompt: str, value_type, min_value, value_name: str):
     while True:
         try:
             value = value_type(input(prompt))
-            if min_value is not None and value < min_value:
+            if value < min_value:
                 message(f"Value must be at least {min_value}. Please try again.", True)
             else:
                 return value
