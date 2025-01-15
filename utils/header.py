@@ -19,5 +19,5 @@ def header_transaction():
 
 def header_report():
     print(
-        f"{'ID':<5} {'Customer':<15} {'Smartphone':<25} {'Quantity':<10} {'Total':<15}"
+        f"{'ID':<5} {'Date':<25} {'Customer':<15} {'Smartphone':<25} {'Quantity':<10} {'Total':<15}"
     )

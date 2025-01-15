@@ -1,4 +1,3 @@
-from datetime import datetime
 from model.customer import Customer
 from model.smartphone import Smartphone
 from model.store import Store
@@ -21,7 +20,7 @@ def sample_data():
     Store.transactions = [
         Transaction(
             1,
-            datetime.strptime("2025-01-12 10:02:50", "%Y-%m-%d %H:%M:%S"),
+            "2025-01-05 10:02:50",
             Store.customers[0],
             Store.smartphones[1],
             2,
