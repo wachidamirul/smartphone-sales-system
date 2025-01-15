@@ -65,10 +65,9 @@ class Store:
                     clear()
                     message("Invalid choice, please try again.", True)
         except ValueError:
-            while True:
-                clear()
-                message("Invalid choice, please try again.", True)
-                cls.menu()
+            clear()
+            message("Invalid choice, please try again.", True)
+            cls.menu()
         except KeyboardInterrupt:
             clear()
             message("Exiting System, Goodbye!")

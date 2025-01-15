@@ -12,13 +12,20 @@ class Smartphone:
         self.stock = stock
 
     def __str__(self):
-        return f"{BRIGHT_BLUE}{self.id:<5} {self.name:<20} {self.stock:<10} Rp {self.price:<15,.2f}{RESET}"
+        if self.stock == 0:
+            callback = f"{BRIGHT_RED}{self.id:<5} {self.name:<25} {self.stock:<10} Rp {self.price:<15,.2f}{RESET}"
+        else:
+            callback = f"{BRIGHT_BLUE}{self.id:<5} {self.name:<25} {self.stock:<10} Rp {self.price:<15,.2f}{RESET}"
+        return callback
 
-    def update_stock(self, stock: int):
-        self.stock += stock
+    def update_stock(self, quantity: int):
+        self.stock -= quantity
+
+    def restock(self, quantity: int):
+        self.stock += quantity
 
     def is_available(self, stock: int) -> bool:
-        return self.stock >= stock
+        return self.stock >= stock and stock > 0
 
     @classmethod
     def create(cls, smartphones):

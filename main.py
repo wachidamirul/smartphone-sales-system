@@ -7,7 +7,7 @@ from model.transaction import Transaction
 def sample_data():
     Store.smartphones = [
         Smartphone(1, "iPhone 13", 5000000, 10),
-        Smartphone(2, "Samsung Galaxy S21", 4000000, 15),
+        Smartphone(2, "Samsung Galaxy S21", 4000000, 2),
         Smartphone(3, "Google Pixel 6", 3000000, 20),
     ]
 
@@ -18,8 +18,11 @@ def sample_data():
     ]
 
     Store.transactions = [
-        Transaction(1, Store.customers[0], Store.smartphones[0], 2),
+        Transaction(1, Store.customers[0], Store.smartphones[1], 2),
     ]
+
+    # Update stock
+    Store.transactions[0].smartphone.update_stock(2)
 
 
 def main():

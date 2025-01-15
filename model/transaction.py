@@ -6,7 +6,7 @@ from utils.header import (
     header_product,
     header_transaction,
 )
-from utils.input_utils import input_int
+from utils.validation import get_valid_id, get_valid_quantity
 from utils.message import message
 
 
@@ -20,43 +20,53 @@ class Transaction:
 
     def __str__(self):
         total = self.smartphone.price * self.quantity
-        return f"{BRIGHT_BLUE}{self.id:<5} {self.customer.name:<10} {self.smartphone.name:<15} {self.quantity:<10} Rp {total:<15,.2f}{RESET}"
+        return f"{BRIGHT_BLUE}{self.id:<5} {self.customer.name:<15} {self.smartphone.name:<25} {self.quantity:<10} Rp {total:<15,.2f}{RESET}"
 
     @classmethod
     def create(cls, customers, smartphones, transactions):
-        # show list of customers
+        # Show list of customers
         header_customer()
         for customer in customers:
             print(customer)
-        customer_id = input_int("Enter customer ID: ", 0)
+        customer_id = get_valid_id("Enter customer ID: ", customers, "Customer")
 
-        # Check if customer exists
-        while customer_id <= 0 or customer_id > len(customers):
-            message("Customer does not exist. Please try again.", True)
-            customer_id = input_int("Enter customer ID: ", 0)
-
-        # show list of smartphones
+        # Show list of smartphones
         clear()
         header_menu("Add Transaction")
         header_product()
         for smartphone in smartphones:
             print(smartphone)
         print(f"Enter customer ID: {customer_id}")
-        smartphone_id = input_int("Enter smartphone ID: ", 0)
 
-        # Check if smartphone exists
-        while smartphone_id <= 0 or smartphone_id > len(smartphones):
-            message("Smartphone does not exist. Please try again.", True)
-            smartphone_id = input_int("Enter smartphone ID: ", 0)
+        smartphone_id = get_valid_id("Enter smartphone ID: ", smartphones, "Smartphone")
 
-        quantity = input_int("Enter quantity: ", 0)
-        id = len(transactions) + 1
+        # Check if smartphone is available
+        smartphone = smartphones[smartphone_id - 1]
+        while not smartphone.is_available(smartphone.stock):
+            message(
+                f"Stock for {smartphone.name} is not available. Please select another smartphone.",
+                True,
+            )
+            smartphone_id = get_valid_id(
+                "Enter smartphone ID: ", smartphones, "Smartphone"
+            )
+            smartphone = smartphones[smartphone_id - 1]
+
+        # Get valid quantity
+        quantity = get_valid_quantity("Enter quantity: ", smartphone.stock)
+
+        # Get the next transaction ID
+        transaction_id = len(transactions) + 1
 
         # Create Transaction object
         transaction = Transaction(
-            id, customers[customer_id - 1], smartphones[smartphone_id - 1], quantity
+            transaction_id, customers[customer_id - 1], smartphone, quantity
         )
         transactions.append(transaction)
+
+        # Update stock
+        smartphone.update_stock(quantity)
+
         message(
             f"Transaction from {transaction.customer.name} has been added successfully."
         )

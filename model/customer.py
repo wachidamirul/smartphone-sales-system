@@ -11,7 +11,7 @@ class Customer:
         self.email = email
 
     def __str__(self):
-        return f"{BRIGHT_BLUE}{self.id:<5} {self.name:<20} {self.email:<20}{RESET}"
+        return f"{BRIGHT_BLUE}{self.id:<5} {self.name:<15} {self.email:<20}{RESET}"
 
     @classmethod
     def create(cls, customers):
