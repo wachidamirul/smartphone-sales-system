@@ -18,7 +18,7 @@ def sample_data():
     ]
 
     Store.transactions = [
-        Transaction(1, Store.customers[0], Store.smartphones[0], 2, 10000000.00),
+        Transaction(1, Store.customers[0], Store.smartphones[0], 2),
     ]
 
 
