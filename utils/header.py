@@ -13,5 +13,11 @@ def header_customer():
 
 def header_transaction():
     print(
+        f"{'ID':<5} {'Date':<25} {'Customer':<15} {'Smartphone':<25} {'Quantity':<10} {'Total':<15}"
+    )
+
+
+def header_report():
+    print(
         f"{'ID':<5} {'Customer':<15} {'Smartphone':<25} {'Quantity':<10} {'Total':<15}"
     )

@@ -1,3 +1,4 @@
+from datetime import datetime
 from utils.clear import clear
 from utils.colors import *
 from utils.header import (
@@ -12,15 +13,21 @@ from utils.message import message
 
 class Transaction:
 
-    def __init__(self, id: int, customer, smartphone, quantity: int):
+    def __init__(self, id: int, date, customer, smartphone, quantity: int):
         self.id = id
+        self.date = date
         self.customer = customer
         self.smartphone = smartphone
         self.quantity = quantity
 
     def __str__(self):
         total = self.smartphone.price * self.quantity
-        return f"{BRIGHT_BLUE}{self.id:<5} {self.customer.name:<15} {self.smartphone.name:<25} {self.quantity:<10} Rp {total:<15,.2f}{RESET}"
+        date_str = (
+            self.date.strftime("%Y-%m-%d %H:%M:%S")
+            if isinstance(self.date, datetime)
+            else self.date
+        )
+        return f"{BRIGHT_BLUE}{self.id:<5} {date_str:<25} {self.customer.name:<15} {self.smartphone.name:<25} {self.quantity:<10} Rp {total:<15,.2f}{RESET}"
 
     @classmethod
     def create(cls, customers, smartphones, transactions):
@@ -52,8 +59,10 @@ class Transaction:
         quantity = get_valid_quantity("Enter quantity: ", smartphone.stock)
         transaction_id = len(transactions) + 1
 
+        date_now = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+
         transaction = Transaction(
-            transaction_id, customers[customer_id - 1], smartphone, quantity
+            transaction_id, date_now, customers[customer_id - 1], smartphone, quantity
         )
         transactions.append(transaction)
         smartphone.update_stock(quantity)

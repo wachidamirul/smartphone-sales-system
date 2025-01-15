@@ -1,4 +1,5 @@
 from model.customer import Customer
+from model.report import Report
 from model.smartphone import Smartphone
 from model.transaction import Transaction
 from utils.clear import clear
@@ -26,10 +27,11 @@ class Store:
                 print("4. Display Customers")
                 print("5. Add Transaction")
                 print("6. Display Transactions")
+                print("7. Sales Report")
                 print("99. Exit")
 
                 choice = input(
-                    f"Enter your choice {BRIGHT_YELLOW}(1-6 or 99 to exit){RESET}: "
+                    f"Enter your choice {BRIGHT_YELLOW}(1-7 or 99 to exit){RESET}: "
                 )
 
                 if not choice.isdigit():
@@ -61,6 +63,10 @@ class Store:
                     clear()
                     header_menu("List of Transactions")
                     Transaction.view(cls.transactions)
+                elif choice == 7:
+                    clear()
+                    header_menu("Sales Report")
+                    Report.filter(cls.transactions)
                 elif choice == 99:
                     clear()
                     message("Exiting System, Goodbye!")
