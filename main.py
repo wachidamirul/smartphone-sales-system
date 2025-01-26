@@ -1,4 +1,3 @@
-import random
 from model.customer import Customer
 from model.smartphone import Smartphone
 from model.store import Store
@@ -7,27 +6,9 @@ from model.transaction import Transaction
 
 def sample_data():
     Store.smartphones = [
-        Smartphone(
-            1,
-            "iPhone 13",
-            5000000,
-            10,
-            504489932881510,
-        ),
-        Smartphone(
-            2,
-            "Samsung Galaxy S21",
-            4000000,
-            2,
-            554205186208184,
-        ),
-        Smartphone(
-            3,
-            "Google Pixel 6",
-            3000000,
-            20,
-            434695290673280,
-        ),
+        Smartphone(1, "iPhone 13", 5000000, 10),
+        Smartphone(2, "Samsung Galaxy S21", 4000000, 2),
+        Smartphone(3, "Google Pixel 6", 3000000, 20),
     ]
 
     Store.customers = [

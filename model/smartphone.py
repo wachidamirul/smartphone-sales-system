@@ -1,24 +1,22 @@
 from utils.colors import *
-from utils.emei import generate_imei
 from utils.header import header_product
 from utils.input_utils import input_float, input_int, input_string
 from utils.message import message
 
 
 class Smartphone:
-    def __init__(self, id: int, name: str, price: float, stock: int, imei: int):
+    def __init__(self, id: int, name: str, price: float, stock: int):
         self.id = id
         self.name = name
         self.price = price
         self.stock = stock
-        self.imei = imei
 
     def __str__(self):
         if self.stock == 0:
-            color = BRIGHT_RED
+            callback = f"{BRIGHT_RED}{self.id:<5} {self.name:<25} {self.stock:<10} Rp {self.price:<15,.2f}{RESET}"
         else:
-            color = BRIGHT_BLUE
-        return f"{color}{self.id:<5} {self.name:<25} {self.stock:<10} Rp {self.price:<15,.2f} {self.imei:<20}{RESET}"
+            callback = f"{BRIGHT_BLUE}{self.id:<5} {self.name:<25} {self.stock:<10} Rp {self.price:<15,.2f}{RESET}"
+        return callback
 
     def update_stock(self, quantity: int):
         self.stock -= quantity
@@ -42,11 +40,8 @@ class Smartphone:
         # Get the next id
         id = len(smartphones) + 1
 
-        # generate imei
-        imei = generate_imei(smartphones)
-
         # Create Smartphone object
-        smartphone = Smartphone(id, name, price, stock, imei)
+        smartphone = Smartphone(id, name, price, stock)
         smartphones.append(smartphone)
         message(f"{name} has been added successfully.")
 
