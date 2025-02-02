@@ -2,6 +2,7 @@ from model.customer import Customer
 from model.report import Report
 from model.smartphone import Smartphone
 from model.transaction import Transaction
+from model.cashier import Cashier
 from utils.clear import clear
 from utils.header import header_menu
 from utils.message import message
@@ -12,6 +13,7 @@ class Store:
     smartphones = []
     customers = []
     transactions = []
+    cashiers = []
 
     def __init__(self):
         pass
@@ -28,10 +30,12 @@ class Store:
                 print("5. Add Transaction")
                 print("6. Display Transactions")
                 print("7. Sales Report")
+                print("8. Add Cashier")
+                print("9. Display Cashiers")
                 print("99. Exit")
 
                 choice = input(
-                    f"Enter your choice {BRIGHT_YELLOW}(1-7 or 99 to exit){RESET}: "
+                    f"Enter your choice {BRIGHT_YELLOW}(1-9 or 99 to exit){RESET}: "
                 )
 
                 if not choice.isdigit():
@@ -58,7 +62,9 @@ class Store:
                 elif choice == 5:
                     clear()
                     header_menu("Add Transaction")
-                    Transaction.create(cls.customers, cls.smartphones, cls.transactions)
+                    Transaction.create(
+                        cls.customers, cls.smartphones, cls.transactions, cls.cashiers
+                    )
                 elif choice == 6:
                     clear()
                     header_menu("List of Transactions")
@@ -67,6 +73,14 @@ class Store:
                     clear()
                     header_menu("Sales Report")
                     Report.filter(cls.transactions)
+                elif choice == 8:
+                    clear()
+                    header_menu("Add Cashier")
+                    Cashier.create(cls.cashiers)
+                elif choice == 9:
+                    clear()
+                    header_menu("List of Cashiers")
+                    Cashier.view(cls.cashiers)
                 elif choice == 99:
                     clear()
                     message("Exiting System, Goodbye!")

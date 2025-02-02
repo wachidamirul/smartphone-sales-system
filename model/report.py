@@ -58,7 +58,7 @@ class Report:
             print(
                 f"{BRIGHT_BLUE}{transaction.id:<5} {transaction.date:<25} {transaction.customer.name:<15} "
                 f"{transaction.smartphone.name:<25} {transaction.quantity:<10} "
-                f"Rp {total:<15,.2f}{RESET}"
+                f"Rp {total:<15,.2f} {transaction.cashier.name:<15}{RESET}"
             )
 
         print(f"\n{BRIGHT_GREEN}Total Sales: Rp {total_sales:<15,.2f}{RESET}")

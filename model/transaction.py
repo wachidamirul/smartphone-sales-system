@@ -2,6 +2,7 @@ import datetime as _dt
 from utils.clear import clear
 from utils.colors import *
 from utils.header import (
+    header_cashier,
     header_customer,
     header_menu,
     header_product,
@@ -13,19 +14,22 @@ from utils.message import message
 
 class Transaction:
 
-    def __init__(self, id: int, date: str, customer, smartphone, quantity: int):
+    def __init__(
+        self, id: int, date: str, customer, smartphone, quantity: int, cashier
+    ):
         self.id = id
         self.date = date
         self.customer = customer
         self.smartphone = smartphone
         self.quantity = quantity
+        self.cashier = cashier
 
     def __str__(self):
         total = self.smartphone.price * self.quantity
-        return f"{BRIGHT_BLUE}{self.id:<5} {self.date:<25} {self.customer.name:<15} {self.smartphone.name:<25} {self.quantity:<10} Rp {total:<15,.2f}{RESET}"
+        return f"{BRIGHT_BLUE}{self.id:<5} {self.date:<25} {self.customer.name:<15} {self.smartphone.name:<25} {self.quantity:<10} Rp {total:<15,.2f} {self.cashier.name:<15}{RESET}"
 
     @classmethod
-    def create(cls, customers, smartphones, transactions):
+    def create(cls, customers, smartphones, transactions, cashiers):
         header_customer()
         for customer in customers:
             print(customer)
@@ -56,8 +60,18 @@ class Transaction:
 
         date_now = _dt.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
+        header_cashier()
+        for cashier in cashiers:
+            print(cashier)
+        cashier_id = get_valid_id("Enter cashier ID: ", cashiers, "Cashier")
+
         transaction = Transaction(
-            transaction_id, date_now, customers[customer_id - 1], smartphone, quantity
+            transaction_id,
+            date_now,
+            customers[customer_id - 1],
+            smartphone,
+            quantity,
+            cashiers[cashier_id - 1],
         )
         transactions.append(transaction)
         smartphone.update_stock(quantity)

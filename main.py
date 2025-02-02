@@ -2,6 +2,7 @@ from model.customer import Customer
 from model.smartphone import Smartphone
 from model.store import Store
 from model.transaction import Transaction
+from model.cashier import Cashier
 
 
 def sample_data():
@@ -17,6 +18,11 @@ def sample_data():
         Customer(3, "Rina", "rina@mail.com"),
     ]
 
+    Store.cashiers = [
+        Cashier(1, "Alice"),
+        Cashier(2, "Bob"),
+    ]
+
     Store.transactions = [
         Transaction(
             1,
@@ -24,6 +30,7 @@ def sample_data():
             Store.customers[0],
             Store.smartphones[1],
             2,
+            Store.cashiers[0],
         ),
     ]
 
